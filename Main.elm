@@ -1,32 +1,34 @@
-import Html exposing (Html, input, text, div)
-import Html.App exposing (beginnerProgram)
-import Html.Attributes exposing (type')
-import Html.Events exposing (on, targetValue, onInput)
-import Json.Decode as Json
+import Html exposing (Attribute, div, text, input)
+import Html.App as Html
+import Html.Attributes as H exposing (..)
+import Html.Events exposing (on, onInput)
+import Json.Decode exposing (string, map)
+import String
 
-type alias Model =
-    { value : String
-    }
+type alias Model = Int
 
-main =
-  beginnerProgram
-      { model = {value = "50"}
-      , view = view
-      , update = update
-      }
-
-type Msg = Slider String
-
-view : Model -> Html Msg
-view model =
-    div []
-      -- [ input [type' "range", on "input" (Json.map Slide targetValue)] []
-      [ input [type' "range", onInput Slider] []
-      , text model.value
-      ]
+type Msg
+    = Update String
 
 update : Msg -> Model -> Model
-update msg model =
-    case msg of
-      Slider v ->
-        { model | value = v}
+update (Update v) model =
+    String.toInt (Debug.log "" v) |> Result.withDefault 0
+
+view model =
+  div []
+    [ input
+      [ type' "range"
+      , H.min "0"
+      , H.max "100"
+      , value <| toString model
+      , onInput Update
+      ] []
+    , text <| toString model
+    ]
+
+main =
+  Html.beginnerProgram
+    { model = 25
+    , view = view
+    , update = update
+    }
