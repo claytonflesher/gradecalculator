@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
     "summary": "Grade Calculator",
-    "repository": "https://github.com/Calvyn82/grade_calculator",
+    "repository": "https://github.com/Calvyn82/gradecalculator.git",
     "license": "MIT",
     "source-directories": [
         "."
