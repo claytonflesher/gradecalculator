@@ -8016,7 +8016,7 @@ var _Calvyn82$gradecalculator$Main$view = function (model) {
 						_elm_lang$core$Native_List.fromArray(
 							[
 								_elm_lang$html$Html_Attributes$type$('range'),
-								_elm_lang$html$Html_Attributes$min('0'),
+								_elm_lang$html$Html_Attributes$min('1'),
 								_elm_lang$html$Html_Attributes$max('50'),
 								_elm_lang$html$Html_Attributes$value(
 								_elm_lang$core$Basics$toString(model)),

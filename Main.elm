@@ -21,7 +21,7 @@ view model =
     , br [] []
     , span [] [text <| toString model]
     , br [] []
-    , input [ type' "range", H.min "0", H.max "50", value <| toString model, onInput Update] []
+    , input [ type' "range", H.min "1", H.max "50", value <| toString model, onInput Update] []
     ]
     , div [class "col-sm-2"]
         [ span [] [text "Missed"]
