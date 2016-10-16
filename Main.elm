@@ -16,17 +16,21 @@ update (Update v) model =
 
 view model =
   div [class "container"] [
+    div [class "container"][
       span [] [text "Number of Questions"]
-    , br [] []
-    , input [ type' "range", H.min "0", H.max "100", value <| toString model, onInput Update] []
     , br [] []
     , span [] [text <| toString model]
     , br [] []
-    , span [] [text "Correct"]
-    , renderCorrectList model
-    , span [] [text "Score"]
-    , br [] []
-    , renderScoreList model
+    , input [ type' "range", H.min "0", H.max "100", value <| toString model, onInput Update] []
+    ]
+    , div [class "col-sm-2"]
+        [ span [] [text "Missed"]
+        , renderMissedList model
+        ]
+    , div [class "col-sm-2"]
+        [ span [] [text "Score"]
+        , renderScoreList model
+        ]
     ]
 
 main =
@@ -36,22 +40,25 @@ main =
     , update = update
     }
 
-renderCorrectList : Int -> Html.Html Msg
-renderCorrectList n =
+renderMissedList : Int -> Html.Html Msg
+renderMissedList n =
   [0..n]
-  |> List.map (\x -> li [] [ text (toString x) ])
-  |> List.reverse
+  |> List.map (\x -> li [class "list-group-item"] [ text (toString x) ])
   |> ul [class "list-group"]
 
 
 renderScoreList : Int -> Html.Html Msg
 renderScoreList n =
   [0..n]
-  |> List.map (\x -> li [] [ text (calculateScore n x) ])
+  |> List.map (\x -> li [class "list-group-item"] [ text (calculateScore n x) ])
   |> List.reverse
   |> ul [class "list-group"]
 
 calculateScore : Int -> Int -> String
 calculateScore total correct =
-  round (((toFloat correct) / (toFloat total)) * 100)
-  |> toString
+  let
+      t = toFloat total
+      c = toFloat correct
+  in
+     round ((c / t) * 100)
+     |> toString
