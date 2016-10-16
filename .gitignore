@@ -2,6 +2,5 @@
 elm-stuff/
 # elm-repl generated files
 repl-temp-*
-main.js
 index.html
 test/elm-stuff
