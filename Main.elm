@@ -2,30 +2,28 @@ import Html exposing (Attribute, div, text, input, ul, li, br, span)
 import Html.App as Html
 import Html.Attributes as H exposing (..)
 import Html.Events exposing (on, onInput)
-import Json.Decode exposing (string, map)
 import String
 
 type alias Model = Int
 
-type Msg
-    = Update String
+type Msg = Update String
 
 update : Msg -> Model -> Model
 update (Update v) model =
     String.toInt (Debug.log "" v) |> Result.withDefault 0
 
 view model =
-  div [class "container"] [
-    div [class "container"][
-      span [] [text "Number of Questions"]
-    , br [] []
-    , span [] [text <| toString model]
-    , br [] []
-    , input [ type' "range", H.min "1", H.max "50", value <| toString model, onInput Update] []
-    ]
+  div [class "container"]
+    [ div [class "container"]
+      [ span [] [text "Number of Questions"]
+      , br [] []
+      , span [] [text <| toString model]
+      , br [] []
+      , input [ type' "range", H.min "1", H.max "50", value <| toString model, onInput Update] []
+      ]
     , div [class "col-sm-2"]
         [ span [] [text "Missed"]
-        , renderMissedList model
+         , renderMissedList model
         ]
     , div [class "col-sm-2"]
         [ span [] [text "Score"]
